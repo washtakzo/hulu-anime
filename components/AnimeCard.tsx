@@ -7,10 +7,10 @@ type Props = {
 };
 
 const cutText = (text: string, size: number) => {
-  const shortText = text.split("");
-  shortText.splice(size);
+  const shortText = text?.split("");
+  shortText?.splice(size);
 
-  return shortText.join("") + (text.length > size ? "..." : "");
+  return shortText?.join("") + (text?.length > size ? "..." : "");
 };
 
 const AnimeCard = ({ anime }: Props) => {
@@ -18,11 +18,11 @@ const AnimeCard = ({ anime }: Props) => {
     <div className="">
       <div className=" relative h-[280px] sm:h-[360px] w-44 sm:w-52 object-fill m-auto hover:scale-105 transition duration-300 hover:cursor-pointer">
         <p className="text-transparent text-center  z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold hover:text-white hover:bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
-          {cutText(anime.description, 300)}
+          {cutText(anime?.description, 300)}
         </p>
         <Image
-          src={anime.coverImage}
-          alt="{anime.title}"
+          src={anime?.coverImage}
+          alt={anime.title}
           fill={true}
           className="object-cover"
         />

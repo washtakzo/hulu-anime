@@ -13,7 +13,7 @@ export default function Home() {
   const [animes, setAnimes] = React.useState([]);
   React.useEffect(() => {
     const get = async () => {
-      const data = await categorie(1992);
+      const data = await categorie();
       console.log({ data });
       setAnimes(data);
     };
