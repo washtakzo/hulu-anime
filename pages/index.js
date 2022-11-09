@@ -3,17 +3,22 @@ import React from "react";
 import getAnimeQuery from "../requests";
 import AnimeCard from "../components/AnimeCard";
 import Header from "../components/Header";
+import { useSelector, useDispatch } from "react-redux";
+import { trending, season } from "../store/mainSlice";
 
 export default function Home() {
+  const categorie = useSelector((state) => state.main.categorie);
+  console.log({ categorie });
+
   const [animes, setAnimes] = React.useState([]);
   React.useEffect(() => {
     const get = async () => {
-      const data = await getAnimeQuery.getSeasonAnime(2022, 42);
+      const data = await categorie(1992);
       console.log({ data });
       setAnimes(data);
     };
     get();
-  }, []);
+  }, [categorie]);
 
   return (
     <div>
