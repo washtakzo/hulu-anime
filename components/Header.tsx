@@ -11,12 +11,12 @@ const NEXT_SEASON_CLASS = "next_season_class";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [activeClass, setActiveClass] = useState("");
+  const [activeClass, setActiveClass] = useState(TRENDING_CLASS);
   const titleClass = `text-center cursor-pointer hover:scale-110 transition duration-300 ease-out`;
   const titleClassActiveColor = "text-green-400";
 
   return (
-    <header className="bg-[#0D1C23] text-white font-semibold flex justify-center gap-8 md:gap-16 xl:text-xl px-10 py-8 ">
+    <header className="bg-[#0D1C23] text-white font-semibold flex flex-wrap justify-center gap-8 md:gap-16 xl:text-xl px-10 py-8">
       <h3
         className={`${titleClass} ${
           activeClass === TRENDING_CLASS && titleClassActiveColor
