@@ -1,10 +1,11 @@
 import axios from "axios";
 import { Animes, FormatedAnimes } from "./types";
 
-const trendingQuery = `
-query ($page: Int, $perPage: Int) {
+const makeQuery = (variables: string, mediaFilters: string) => {
+  return `
+  query ($page: Int, $perPage: Int, ${variables}) {
     Page(page: $page, perPage: $perPage) {
-        media(type: ANIME, isAdult: false,  sort: TRENDING_DESC) {
+        media(isAdult: false, ${mediaFilters}) {
             id
             title {
                 english
@@ -27,84 +28,21 @@ query ($page: Int, $perPage: Int) {
     }
 }
 `;
-const popularQuery = `
-query ($page: Int, $perPage: Int) {
-    Page(page: $page, perPage: $perPage) {
-        media(type: ANIME, isAdult: false,  sort: POPULARITY_DESC) {
-            id
-            title {
-                english
-                native
-                }
-            type
-            genres
-            coverImage{
-                extraLarge
-              }
-              bannerImage
-              trailer{
-                id
-                site
-                }
-            description
-            popularity
-            trending
-        }
-    }
-}
-`;
-const seasonQuery = `
-query ($page: Int, $perPage: Int, $seasonYear: Int) {
-    Page(page: $page, perPage: $perPage) {
-        media(seasonYear: $seasonYear, type: ANIME, isAdult: false,  sort: TRENDING_DESC) {
-            id
-            title {
-                english
-                native
-                }
-            type
-            genres
-            coverImage{
-                extraLarge
-                }
-            bannerImage
-            trailer{
-                id
-                site
-                }
-            description
-            popularity
-            trending
-        }
-    }
-}
-`;
-const searchQuery = `
-query ($page: Int, $perPage: Int, $search: String) {
-    Page(page: $page, perPage: $perPage) {
-        media(search: $search, type: ANIME, isAdult: false, sort: TRENDING_DESC) {
-            id
-            title {
-                english
-                native
-                }
-            type
-            genres
-            coverImage{
-                extraLarge
-              }
-              bannerImage
-              trailer{
-                id
-                site
-                }
-            description
-            popularity
-            trending
-        }
-    }
-}
-`;
+};
+
+const seasonQuery = makeQuery(
+  "$seasonYear: Int",
+  "seasonYear: $seasonYear, type: ANIME, sort: TRENDING_DESC"
+);
+
+const trendingQuery = makeQuery("", "type: ANIME, sort: TRENDING_DESC");
+
+const popularQuery = makeQuery("", "type: ANIME, sort: POPULARITY_DESC");
+
+const searchQuery = makeQuery(
+  "$search: String",
+  "search: $search ,type: ANIME, sort: TRENDING_DESC"
+);
 
 async function getAnime(query, variables): Promise<Animes> {
   const url = "https://graphql.anilist.co";
@@ -146,6 +84,7 @@ const getPopularAnime = async (nbResult: number = 42) => {
   });
   return formatedAnimes;
 };
+
 const getTrendingAnime = async (nbResult: number = 42) => {
   const variables = {
     page: 1,
@@ -168,6 +107,7 @@ const getTrendingAnime = async (nbResult: number = 42) => {
   });
   return formatedAnimes;
 };
+
 const getSeasonAnime = async (seasonYear: Number, nbResult: number = 42) => {
   const variables = {
     seasonYear: seasonYear,
@@ -192,6 +132,7 @@ const getSeasonAnime = async (seasonYear: Number, nbResult: number = 42) => {
   });
   return formatedAnimes;
 };
+
 const getSearchedAnime = async (animeName: String, nbResult: number = 42) => {
   const variables = {
     search: animeName,

@@ -16,62 +16,67 @@ const Header = () => {
   const titleClassActiveColor = "text-green-400";
 
   return (
-    <header className="bg-[#0D1C23] text-white font-semibold flex flex-wrap justify-center gap-8 md:gap-16 xl:text-xl px-10 py-8">
-      <h3
-        className={`${titleClass} ${
-          activeClass === TRENDING_CLASS && titleClassActiveColor
-        }`}
-        onClick={() => {
-          dispatch(mainActions.getTrending());
-          setActiveClass(TRENDING_CLASS);
-        }}
-      >
-        Trending
-      </h3>
-      <h3
-        className={`${titleClass} ${
-          activeClass === POPULAR_CLASS && titleClassActiveColor
-        }`}
-        onClick={() => {
-          dispatch(mainActions.getPopular());
-          setActiveClass(POPULAR_CLASS);
-        }}
-      >
-        Popular
-      </h3>
-      <h3
-        className={`${titleClass} ${
-          activeClass === CURRENT_SEASON_CLASS && titleClassActiveColor
-        }`}
-        onClick={() => {
-          dispatch(mainActions.getSeason({ year: 2022 }));
-          setActiveClass(CURRENT_SEASON_CLASS);
-        }}
-      >
-        Current Season
-      </h3>
-      <h3
-        className={`${titleClass} ${
-          activeClass === LAST_SEASON_CLASS && titleClassActiveColor
-        }`}
-        onClick={() => {
-          dispatch(mainActions.getSeason({ year: 2021 }));
-          setActiveClass(LAST_SEASON_CLASS);
-        }}
-      >
-        Last Season
-      </h3>
-      <h3
-        className={`${titleClass} ${
-          activeClass === NEXT_SEASON_CLASS && titleClassActiveColor
-        }`}
-        onClick={() => {
-          dispatch(mainActions.getSeason({ year: 2023 }));
-          setActiveClass(NEXT_SEASON_CLASS);
-        }}
-      >
-        Next Season
-      </h3>
+    <header className="bg-[#0D1C23] text-white">
+      <h1 className="py-8 text-3xl md:text-4xl font-bold text-center">
+        Hulu-Anime
+      </h1>
+      <div className=" font-semibold flex flex-wrap justify-center gap-8 md:gap-16 xl:text-xl px-10 py-4">
+        <h3
+          className={`${titleClass} ${
+            activeClass === TRENDING_CLASS && titleClassActiveColor
+          }`}
+          onClick={() => {
+            dispatch(mainActions.getTrending());
+            setActiveClass(TRENDING_CLASS);
+          }}
+        >
+          Trending
+        </h3>
+        <h3
+          className={`${titleClass} ${
+            activeClass === POPULAR_CLASS && titleClassActiveColor
+          }`}
+          onClick={() => {
+            dispatch(mainActions.getPopular());
+            setActiveClass(POPULAR_CLASS);
+          }}
+        >
+          Popular
+        </h3>
+        <h3
+          className={`${titleClass} ${
+            activeClass === CURRENT_SEASON_CLASS && titleClassActiveColor
+          }`}
+          onClick={() => {
+            dispatch(mainActions.getSeason({ year: 2022 }));
+            setActiveClass(CURRENT_SEASON_CLASS);
+          }}
+        >
+          Current Season
+        </h3>
+        <h3
+          className={`${titleClass} ${
+            activeClass === LAST_SEASON_CLASS && titleClassActiveColor
+          }`}
+          onClick={() => {
+            dispatch(mainActions.getSeason({ year: 2021 }));
+            setActiveClass(LAST_SEASON_CLASS);
+          }}
+        >
+          Last Season
+        </h3>
+        <h3
+          className={`${titleClass} ${
+            activeClass === NEXT_SEASON_CLASS && titleClassActiveColor
+          }`}
+          onClick={() => {
+            dispatch(mainActions.getSeason({ year: 2023 }));
+            setActiveClass(NEXT_SEASON_CLASS);
+          }}
+        >
+          Next Season
+        </h3>
+      </div>
     </header>
   );
 };
