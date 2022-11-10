@@ -14,6 +14,15 @@ const Header = () => {
   const [activeClass, setActiveClass] = useState(TRENDING_CLASS);
   const titleClass = `text-center cursor-pointer hover:scale-110 transition duration-300 ease-out`;
   const titleClassActiveColor = "text-green-400";
+  const animeInputRef: any = React.useRef();
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    dispatch(
+      mainActions.getSearch({
+        animeName: animeInputRef.current.value || "dragon ball",
+      })
+    );
+  };
 
   return (
     <header className="bg-[#0D1C23] text-white">
@@ -76,6 +85,35 @@ const Header = () => {
         >
           Next Season
         </h3>
+      </div>
+      <div className="flex justify-center py-2">
+        <form
+          className="border border-green-300 p-1 rounded-xl"
+          onSubmit={handleSubmitSearch}
+        >
+          <input
+            type="text"
+            placeholder="Search anime ..."
+            className="bg-transparent outline-none mx-2 w-36 md:w-52 xl:w-72 placeholder:text-white"
+            ref={animeInputRef}
+          />
+          <button type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 inline-flex cursor-pointer hover:scale-110 hover:text-green-300 transition duration-300 ease-out"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </form>
       </div>
     </header>
   );

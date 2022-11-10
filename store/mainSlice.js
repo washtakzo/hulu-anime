@@ -17,6 +17,13 @@ export const mainSlice = createSlice({
       state.categorie = () =>
         getAnimeQuery.getSeasonAnime(action.payload.year, action.payload.size);
     },
+    getSearch: (state, action) => {
+      state.categorie = () =>
+        getAnimeQuery.getSearchedAnime(
+          action.payload.animeName,
+          action.payload.size
+        );
+    },
   },
 });
 
