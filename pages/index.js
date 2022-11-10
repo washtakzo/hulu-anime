@@ -5,6 +5,7 @@ import AnimeCard from "../components/AnimeCard";
 import Header from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { trending, season } from "../store/mainSlice";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const categorie = useSelector((state) => state.main.categorie);
@@ -42,6 +43,8 @@ export default function Home() {
           ))}
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
