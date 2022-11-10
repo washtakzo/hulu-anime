@@ -9,13 +9,11 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   const categorie = useSelector((state) => state.main.categorie);
-  console.log({ categorie });
 
   const [animes, setAnimes] = React.useState([]);
   React.useEffect(() => {
     const get = async () => {
       const data = await categorie();
-      console.log({ data });
       setAnimes(data);
     };
     get();

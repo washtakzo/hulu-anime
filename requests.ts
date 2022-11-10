@@ -5,7 +5,7 @@ const makeQuery = (variables: string, mediaFilters: string) => {
   return `
   query ($page: Int, $perPage: Int, ${variables}) {
     Page(page: $page, perPage: $perPage) {
-        media(isAdult: false, ${mediaFilters}) {
+        media(isAdult: false, isLicensed:true, ${mediaFilters}) {
             id
             title {
                 english

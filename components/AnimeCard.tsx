@@ -16,14 +16,15 @@ const cutText = (text: string, size: number) => {
 
 const AnimeCard = ({ anime }: Props) => {
   return (
-    <div
-      onClick={() => {
-        window.open(
-          `https://www.youtube.com/results?search_query=${anime.title}+trailer`
-        );
-      }}
-    >
-      <div className=" relative h-[280px] sm:h-[360px] w-44 sm:w-52 object-fill m-auto hover:scale-105 transition duration-300 hover:cursor-pointer">
+    <div>
+      <div
+        className=" relative h-[280px] sm:h-[360px] w-44 sm:w-52 object-fill m-auto hover:scale-105 transition duration-300 hover:cursor-pointer"
+        onClick={() => {
+          window.open(
+            `https://www.youtube.com/results?search_query=${anime.title}+trailer`
+          );
+        }}
+      >
         <p className="text-transparent text-center  z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold hover:text-white hover:bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
           {cutText(anime?.description, 300)}
         </p>
@@ -31,6 +32,7 @@ const AnimeCard = ({ anime }: Props) => {
           src={anime?.coverImage}
           alt={anime.title}
           fill={true}
+          sizes="600px"
           className="object-cover"
         />
       </div>
