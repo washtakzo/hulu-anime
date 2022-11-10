@@ -7,6 +7,7 @@ type Props = {
 };
 
 const cutText = (text: string, size: number) => {
+  if (!text) return "No description available";
   const shortText = text?.split("");
   shortText?.splice(size);
 
