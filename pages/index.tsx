@@ -6,28 +6,6 @@ import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import useFetchAnimes from "../hooks/useFetchAnimes";
 
-type d_anime = {
-  title: string;
-  coverImage: string;
-  description: string;
-};
-type d_animes = d_anime[];
-
-const DUMMY_ANIME: d_anime = {
-  title: "title",
-  coverImage:
-    "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx124395-9GeigGh1Ae2f.png",
-  description: "description !!!",
-};
-const DUMMY_ANIMES: d_animes = Array(24).fill(DUMMY_ANIME);
-const dummy_fun = async (): Promise<d_animes> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(DUMMY_ANIMES);
-    }, 4000);
-  });
-};
-
 export default function Home() {
   const { isLoading, animes, error } = useFetchAnimes();
 

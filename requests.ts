@@ -62,7 +62,7 @@ const searchQuery = makeQuery(
 async function getAnime(query, variables): Promise<Animes> {
   const url = "https://graphql.anilist.co";
 
-  const data = await axios({
+  const data = axios({
     method: "post",
     url: url,
     headers: {
@@ -73,8 +73,12 @@ async function getAnime(query, variables): Promise<Animes> {
       query: query,
       variables: variables,
     },
-  });
-  return data.data.data.Page.media;
+  })
+    .then((res) => res.data.data.Page.media)
+    .catch((error) => {
+      throw new Error("erreur getAnime");
+    });
+  return data;
 }
 
 const getPopularAnime = async (nbResult: number = 40) => {

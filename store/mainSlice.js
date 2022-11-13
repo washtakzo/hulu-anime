@@ -1,28 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getAnimeQuery from "../requests";
+import { AnimeSections } from "../utils/classes";
 
 export const mainSlice = createSlice({
   name: "main",
   initialState: {
-    categorie: getAnimeQuery.getTrendingAnime,
+    categorie: AnimeSections.TRENDING,
+    payload: {},
   },
   reducers: {
     getTrending: (state) => {
-      state.categorie = getAnimeQuery.getTrendingAnime;
+      state.categorie = AnimeSections.TRENDING;
     },
     getPopular: (state) => {
-      state.categorie = getAnimeQuery.getPopularAnime;
+      state.categorie = AnimeSections.POPULAR;
     },
     getSeason: (state, action) => {
-      state.categorie = () =>
-        getAnimeQuery.getSeasonAnime(action.payload.year, action.payload.size);
+      state.categorie = () => AnimeSections.SEASON;
+      state.payload = { ...action.payload };
     },
     getSearch: (state, action) => {
-      state.categorie = () =>
-        getAnimeQuery.getSearchedAnime(
-          action.payload.animeName,
-          action.payload.size
-        );
+      state.categorie = () => AnimeSections.SEARCH_ANIME;
+      state.payload = action.payload;
     },
   },
 });
