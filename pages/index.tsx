@@ -12,7 +12,6 @@ w-[360px] sm:w-[440px] md:w-[660px] lg:w-[860px] xl:w-[1080px]
 
 export default function Home() {
   const { isLoading, animes, error } = useFetchAnimes();
-  console.log({ isLoading });
 
   return (
     <>
