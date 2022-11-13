@@ -7,7 +7,8 @@ const Footer = () => {
   return (
     <footer>
       <h4
-        className="text-lg p-8  text-center cursor-pointer hover:scale-105 transition duration-300 ease-out w-64 m-auto"
+        className={`mt-auto text-lg text-center cursor-pointer 
+        hover:scale-105 transition duration-300 ease-out w-64 mx-auto my-8`}
         onClick={handleClick}
       >
         Développé par Zoher

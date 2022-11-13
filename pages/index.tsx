@@ -21,49 +21,59 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-
-      <main>
-        {!isLoading && error && (
-          <>
-            <h2 className=" text-center text-xl mt-20 font-semibold ">
-              The following error occured :
-              <br />
-              <br />
-              <span className="text-red-400">[{error.message}]</span>
-              <br />
-              <br />
-              please try again later
-            </h2>
+      <div className="flex flex-col min-h-screen justify-between">
+        <div>
+          <Header />
+          <main>
+            {!isLoading && error && (
+              <>
+                <h2 className=" text-center text-xl mt-20 font-semibold ">
+                  The following error occured :
+                  <br />
+                  <br />
+                  <span className="text-red-400">[{error.message}]</span>
+                  <br />
+                  <br />
+                  please try again later
+                </h2>
+                <div className={animeGridContainerClass}>
+                  {Array(6)
+                    .fill(0)
+                    .map((_) => (
+                      <AnimeCard
+                        key={Math.random()}
+                        anime={null}
+                        isFetching={true}
+                      />
+                    ))}
+                </div>
+              </>
+            )}
             <div className={animeGridContainerClass}>
-              {Array(12)
-                .fill(0)
-                .map((_) => (
+              {isLoading &&
+                Array(6)
+                  .fill(0)
+                  .map((_) => (
+                    <AnimeCard
+                      key={Math.random()}
+                      anime={null}
+                      isFetching={true}
+                    />
+                  ))}
+              {!isLoading &&
+                !error &&
+                animes.map((anime) => (
                   <AnimeCard
                     key={Math.random()}
-                    anime={null}
-                    isFetching={true}
+                    anime={anime}
+                    isFetching={false}
                   />
                 ))}
             </div>
-          </>
-        )}
-        <div className={animeGridContainerClass}>
-          {isLoading &&
-            Array(24)
-              .fill(0)
-              .map((_) => (
-                <AnimeCard key={Math.random()} anime={null} isFetching={true} />
-              ))}
-          {!isLoading &&
-            !error &&
-            animes.map((anime) => (
-              <AnimeCard key={Math.random()} anime={anime} isFetching={false} />
-            ))}
+          </main>
         </div>
-      </main>
-
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }
