@@ -5,6 +5,7 @@ import { FormatedAnime } from "../types";
 type Props = {
   anime: FormatedAnime | null;
   isFetching: boolean;
+  key: any;
 };
 
 const cutText = (text: string, size: number) => {
