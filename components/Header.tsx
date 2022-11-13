@@ -89,13 +89,13 @@ const Header = () => {
       </div>
       <div className="flex justify-center py-2">
         <form
-          className="border border-green-300 p-1 rounded-xl"
+          className="px-3 py-2 rounded-xl bg-slate-800 opacity-80"
           onSubmit={handleSubmitSearch}
         >
           <input
             type="text"
             placeholder="Search anime ..."
-            className="bg-transparent outline-none mx-2 w-36 md:w-52 xl:w-72 placeholder:text-white"
+            className="bg-transparent outline-none  w-36 md:w-52 xl:w-72 placeholder:text-white"
             ref={animeInputRef}
           />
           <button type="submit">

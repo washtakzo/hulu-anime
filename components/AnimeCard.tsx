@@ -1,19 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { FormatedAnime } from "../types";
+import { truncat } from "../utils/helpers";
 
 type Props = {
   anime: FormatedAnime | null;
   isFetching: boolean;
   key: any;
-};
-
-const cutText = (text: string, size: number) => {
-  if (!text) return "No description available";
-  const shortText = text?.split("");
-  shortText?.splice(size);
-
-  return shortText?.join("") + (text?.length > size ? "..." : "");
 };
 
 const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
@@ -32,12 +25,12 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
         className=" relative h-[280px] sm:h-[360px] w-44 sm:w-52 object-fill m-auto hover:scale-105 transition duration-300 hover:cursor-pointer"
         onClick={() => {
           window.open(
-            `https://www.youtube.com/results?search_query=${anime.title}+trailer`
+            `https://www.youtube.com/results?search_query=${anime.title} trailer`
           );
         }}
       >
         <p className="opacity-0 hover:opacity-100 text-center  z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
-          {cutText(anime?.description, 300)}
+          {truncat(anime?.description, 300)}
         </p>
         <Image
           src={anime?.coverImage}
@@ -48,7 +41,7 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
         />
       </div>
 
-      <h2 className="text-lg py-2 font-semibold">{anime.title}</h2>
+      <h2 className="text-lg py-2 font-semibold">{truncat(anime.title, 40)}</h2>
     </div>
   );
 };
