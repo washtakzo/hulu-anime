@@ -1,4 +1,3 @@
-import getAnimeQuery from "../requests";
 import { configureStore } from "@reduxjs/toolkit";
 import mainReducer from "./mainSlice";
 

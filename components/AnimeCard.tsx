@@ -3,7 +3,8 @@ import Image from "next/image";
 import { FormatedAnime } from "../types";
 
 type Props = {
-  anime: FormatedAnime;
+  anime: FormatedAnime | null;
+  isFetching: boolean;
 };
 
 const cutText = (text: string, size: number) => {
@@ -14,7 +15,16 @@ const cutText = (text: string, size: number) => {
   return shortText?.join("") + (text?.length > size ? "..." : "");
 };
 
-const AnimeCard = ({ anime }: Props) => {
+const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
+  if (isFetching) {
+    return (
+      <div>
+        <div className="h-[280px] sm:h-[360px] w-44 sm:w-52 m-auto bg-slate-800 opacity-40" />
+        <h2 className="my-2 w-44 h-6 bg-slate-800 opacity-40"></h2>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div

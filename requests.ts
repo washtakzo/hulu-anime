@@ -30,6 +30,21 @@ const makeQuery = (variables: string, mediaFilters: string) => {
 `;
 };
 
+const formatAnimes = (anime) => {
+  return {
+    bannerImage: anime.bannerImage,
+    coverImage: anime.coverImage.extraLarge,
+    description: anime.description,
+    genres: anime.genres,
+    id: anime.id,
+    popularity: anime.popularity,
+    title: anime.title.english || anime.title.native,
+    trailer: anime.trailer,
+    trending: anime.trending,
+    type: anime.type,
+  };
+};
+
 const seasonQuery = makeQuery(
   "$seasonYear: Int",
   "seasonYear: $seasonYear, type: ANIME, sort: TRENDING_DESC"
@@ -62,36 +77,23 @@ async function getAnime(query, variables): Promise<Animes> {
   return data.data.data.Page.media;
 }
 
-const getPopularAnime = async (nbResult: number = 42) => {
+const getPopularAnime = async (nbResult: number = 40) => {
   const variables = {
     page: 1,
     perPage: nbResult,
   };
   const animes: Animes = await getAnime(popularQuery, variables);
-  const formatedAnimes: FormatedAnimes = animes.map((anime) => {
-    return {
-      bannerImage: anime.bannerImage,
-      coverImage: anime.coverImage.extraLarge,
-      description: anime.description,
-      genres: anime.genres,
-      id: anime.id,
-      popularity: anime.popularity,
-      title: anime.title.english || anime.title.native,
-      trailer: anime.trailer,
-      trending: anime.trending,
-      type: anime.type,
-    };
-  });
+  const formatedAnimes: FormatedAnimes = animes.map(formatAnimes);
   return formatedAnimes;
 };
 
-const getTrendingAnime = async (nbResult: number = 42) => {
+const getTrendingAnime = async (nbResult: number = 41) => {
   const variables = {
     page: 1,
     perPage: nbResult,
   };
   const animes: Animes = await getAnime(trendingQuery, variables);
-  const formatedAnimes: FormatedAnimes = animes.map((anime) => {
+  const formatedAnimes: FormatedAnimes = animes?.map((anime) => {
     return {
       bannerImage: anime.bannerImage,
       coverImage: anime.coverImage.extraLarge,
@@ -116,24 +118,11 @@ const getSeasonAnime = async (seasonYear: Number, nbResult: number = 42) => {
   };
 
   const animes: Animes = await getAnime(seasonQuery, variables);
-  const formatedAnimes: FormatedAnimes = animes.map((anime) => {
-    return {
-      bannerImage: anime.bannerImage,
-      coverImage: anime.coverImage.extraLarge,
-      description: anime.description,
-      genres: anime.genres,
-      id: anime.id,
-      popularity: anime.popularity,
-      title: anime.title.english || anime.title.native,
-      trailer: anime.trailer,
-      trending: anime.trending,
-      type: anime.type,
-    };
-  });
+  const formatedAnimes: FormatedAnimes = animes.map(formatAnimes);
   return formatedAnimes;
 };
 
-const getSearchedAnime = async (animeName: String, nbResult: number = 42) => {
+const getSearchedAnime = async (animeName: String, nbResult: number = 43) => {
   const variables = {
     search: animeName,
     page: 1,
@@ -141,20 +130,7 @@ const getSearchedAnime = async (animeName: String, nbResult: number = 42) => {
   };
 
   const animes: Animes = await getAnime(searchQuery, variables);
-  const formatedAnimes: FormatedAnimes = animes.map((anime) => {
-    return {
-      bannerImage: anime.bannerImage,
-      coverImage: anime.coverImage.extraLarge,
-      description: anime.description,
-      genres: anime.genres,
-      id: anime.id,
-      popularity: anime.popularity,
-      title: anime.title.english || anime.title.native,
-      trailer: anime.trailer,
-      trending: anime.trending,
-      type: anime.type,
-    };
-  });
+  const formatedAnimes: FormatedAnimes = animes.map(formatAnimes);
   return formatedAnimes;
 };
 
