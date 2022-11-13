@@ -36,7 +36,7 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
           );
         }}
       >
-        <p className="text-transparent text-center  z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold hover:text-white hover:bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
+        <p className="opacity-0 hover:opacity-100 text-center  z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
           {cutText(anime?.description, 300)}
         </p>
         <Image
@@ -48,7 +48,7 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
         />
       </div>
 
-      <h2 className="text-white text-lg py-2 font-semibold">{anime.title}</h2>
+      <h2 className="text-lg py-2 font-semibold">{anime.title}</h2>
     </div>
   );
 };

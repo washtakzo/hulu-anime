@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import AnimeCard from "../components/AnimeCard";
 import Header from "../components/Header";
-import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import useFetchAnimes from "../hooks/useFetchAnimes";
 
@@ -25,7 +24,7 @@ export default function Home() {
 
       <Header />
 
-      <main className="bg-[#0D1C23]">
+      <main>
         {!isLoading && error && (
           <>
             <h2 className=" text-center text-xl mt-20 font-semibold ">

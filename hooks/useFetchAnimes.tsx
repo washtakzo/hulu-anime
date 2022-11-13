@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FormatedAnimes } from "../types";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useFetchAnimes = () => {

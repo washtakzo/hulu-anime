@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#0D1C23] text-white">
+    <header>
       <h1 className="py-8 text-3xl md:text-4xl font-bold text-center">
         Hulu-Anime
       </h1>
