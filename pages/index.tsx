@@ -4,14 +4,16 @@ import AnimeCard from "../components/AnimeCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import useFetchAnimes from "../hooks/useFetchAnimes";
+import getAnimeQuery from "../requests";
 
 const animeGridContainerClass = `grid py-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4  
 w-[360px] sm:w-[440px] md:w-[660px] lg:w-[860px] xl:w-[1080px] 
 2xl:w-[1300px] 3xl:w-[1400px] m-auto`;
 
-export default function Home() {
+export default function Home(props) {
   const { isLoading, animes, error } = useFetchAnimes();
+  const animesToDisplay = animes || props.animes;
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function Home() {
                   ))}
               {!isLoading &&
                 !error &&
-                animes.map((anime) => (
+                animesToDisplay.map((anime) => (
                   <AnimeCard
                     key={Math.random()}
                     anime={anime}
@@ -78,11 +80,11 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps() {
-//   const animes = await getAnimeQuery.getTrendingAnime();
-//   return {
-//     props: {
-//       animes,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  const animes = await getAnimeQuery.getTrendingAnime();
+  return {
+    props: {
+      animes,
+    },
+  };
+}

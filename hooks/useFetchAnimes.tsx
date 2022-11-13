@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useFetchAnimes = () => {
-  const categorie = useSelector((state: any) => state.main.categorie); //source d'erreur
+  const categorie = useSelector((state: any) => state.main.categorie);
   const [isLoading, setIsLoading] = useState(true);
-  const [animes, setAnimes] = useState([]);
+  const [animes, setAnimes] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
