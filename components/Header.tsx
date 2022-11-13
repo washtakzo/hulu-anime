@@ -22,6 +22,7 @@ const Header = () => {
         animeName: animeInputRef.current.value || "dragon ball",
       })
     );
+    setActiveClass(null);
   };
 
   return (

@@ -40,7 +40,7 @@ export default function Home() {
             <div className={animeGridContainerClass}>
               {Array(12)
                 .fill(0)
-                .map((el) => (
+                .map((_) => (
                   <AnimeCard
                     key={Math.random()}
                     anime={null}
