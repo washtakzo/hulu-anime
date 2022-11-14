@@ -7,9 +7,9 @@ import useFetchAnimes from "../hooks/useFetchAnimes";
 import getAnimeQuery from "../requests";
 
 const animeGridContainerClass = `grid py-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
-xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4  
-w-[360px] sm:w-[440px] md:w-[660px] lg:w-[860px] xl:w-[1080px] 
-2xl:w-[1300px] 3xl:w-[1400px] m-auto`;
+xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 
+ m-auto w-[370px] sm:w-[440px] md:w-[660px] lg:w-[860px] xl:w-[1080px] 
+ 2xl:w-[1300px] 3xl:w-[1400px]`;
 
 export default function Home(props) {
   const { isLoading, animes, error } = useFetchAnimes();
