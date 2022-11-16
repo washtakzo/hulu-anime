@@ -6,7 +6,7 @@ export const mainSlice = createSlice({
   name: "main",
   initialState: {
     categorie: fetchFunctionToUse.TRENDING,
-    payload: null,
+    payload: undefined,
   },
   reducers: {
     getTrending: (state) => {
@@ -31,6 +31,7 @@ export const mainActions = mainSlice.actions;
 
 export default mainSlice.reducer;
 
+//V1 Code :
 // export const mainSlice = createSlice({
 //   name: "main",
 //   initialState: {

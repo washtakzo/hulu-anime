@@ -6,9 +6,7 @@ import { fetchFunctionToUse } from "../utils/helpers";
 const useFetchAnimes = () => {
   const categorie = useSelector((state: any) => state.main.categorie);
   const payload = useSelector((state: any) => state.main.payload);
-  const [categorieFunction, setCategorieFunction] = useState(
-    getAnimeQuery.getTrendingAnime
-  );
+
   const [isLoading, setIsLoading] = useState(true);
   const [animes, setAnimes] = useState(null);
   const [error, setError] = useState(null);

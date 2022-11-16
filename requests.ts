@@ -77,20 +77,12 @@ async function getAnime(query, variables): Promise<Animes> {
   return data.data.data.Page.media;
 }
 
-const getPopularAnime = async (nbResult: number = 40) => {
+const getTrendingAnime = async (
+  payload: { nbResult: number } = { nbResult: 42 }
+) => {
   const variables = {
     page: 1,
-    perPage: nbResult,
-  };
-  const animes: Animes = await getAnime(popularQuery, variables);
-  const formatedAnimes: FormatedAnimes = animes.map(formatAnimes);
-  return formatedAnimes;
-};
-
-const getTrendingAnime = async (nbResult: number = 41) => {
-  const variables = {
-    page: 1,
-    perPage: nbResult,
+    perPage: payload.nbResult,
   };
   const animes: Animes = await getAnime(trendingQuery, variables);
   const formatedAnimes: FormatedAnimes = animes?.map((anime) => {
@@ -110,11 +102,23 @@ const getTrendingAnime = async (nbResult: number = 41) => {
   return formatedAnimes;
 };
 
+const getPopularAnime = async (
+  payload: { nbResult: number } = { nbResult: 42 }
+) => {
+  const variables = {
+    page: 1,
+    perPage: payload.nbResult,
+  };
+  const animes: Animes = await getAnime(popularQuery, variables);
+  const formatedAnimes: FormatedAnimes = animes.map(formatAnimes);
+  return formatedAnimes;
+};
+
 const getSeasonAnime = async (payload: { year: Number; nbResult: number }) => {
   const variables = {
     seasonYear: payload.year,
     page: 1,
-    perPage: payload.nbResult || 42,
+    perPage: 42,
   };
 
   const animes: Animes = await getAnime(seasonQuery, variables);
