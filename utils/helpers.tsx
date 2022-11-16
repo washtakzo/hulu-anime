@@ -5,3 +5,10 @@ export const truncat = (text: string, size: number) => {
 
   return shortText?.join("") + (text?.length > size ? "..." : "");
 };
+
+export enum fetchFunctionToUse {
+  TRENDING,
+  POPULAR,
+  SEASON,
+  SEARCH,
+}

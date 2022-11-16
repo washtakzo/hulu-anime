@@ -1,28 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getAnimeQuery from "../requests";
+import { fetchFunctionToUse } from "../utils/helpers";
 
 export const mainSlice = createSlice({
   name: "main",
   initialState: {
-    categorie: getAnimeQuery.getTrendingAnime,
+    categorie: fetchFunctionToUse.TRENDING,
+    payload: null,
   },
   reducers: {
     getTrending: (state) => {
-      state.categorie = getAnimeQuery.getTrendingAnime;
+      state.categorie = fetchFunctionToUse.TRENDING;
     },
     getPopular: (state) => {
-      state.categorie = getAnimeQuery.getPopularAnime;
+      state.categorie = fetchFunctionToUse.POPULAR;
     },
     getSeason: (state, action) => {
-      state.categorie = () =>
-        getAnimeQuery.getSeasonAnime(action.payload.year, action.payload.size);
+      state.categorie = fetchFunctionToUse.SEASON;
+      state.payload = action.payload;
     },
     getSearch: (state, action) => {
-      state.categorie = () =>
-        getAnimeQuery.getSearchedAnime(
-          action.payload.animeName,
-          action.payload.size
-        );
+      state.categorie = fetchFunctionToUse.SEARCH;
+      state.payload = action.payload;
     },
   },
 });
@@ -31,3 +30,29 @@ export const mainSlice = createSlice({
 export const mainActions = mainSlice.actions;
 
 export default mainSlice.reducer;
+
+// export const mainSlice = createSlice({
+//   name: "main",
+//   initialState: {
+//     categorie: getAnimeQuery.getTrendingAnime,
+//   },
+//   reducers: {
+//     getTrending: (state) => {
+//       state.categorie = getAnimeQuery.getTrendingAnime;
+//     },
+//     getPopular: (state) => {
+//       state.categorie = getAnimeQuery.getPopularAnime;
+//     },
+//     getSeason: (state, action) => {
+//       state.categorie = () =>
+//         getAnimeQuery.getSeasonAnime(action.payload.year, action.payload.size);
+//     },
+//     getSearch: (state, action) => {
+//       state.categorie = () =>
+//         getAnimeQuery.getSearchedAnime(
+//           action.payload.animeName,
+//           action.payload.size
+//         );
+//     },
+//   },
+// });

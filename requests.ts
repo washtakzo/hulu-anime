@@ -110,11 +110,11 @@ const getTrendingAnime = async (nbResult: number = 41) => {
   return formatedAnimes;
 };
 
-const getSeasonAnime = async (seasonYear: Number, nbResult: number = 42) => {
+const getSeasonAnime = async (payload: { year: Number; nbResult: number }) => {
   const variables = {
-    seasonYear: seasonYear,
+    seasonYear: payload.year,
     page: 1,
-    perPage: nbResult,
+    perPage: payload.nbResult || 42,
   };
 
   const animes: Animes = await getAnime(seasonQuery, variables);
@@ -122,11 +122,14 @@ const getSeasonAnime = async (seasonYear: Number, nbResult: number = 42) => {
   return formatedAnimes;
 };
 
-const getSearchedAnime = async (animeName: String, nbResult: number = 43) => {
+const getSearchedAnime = async (payload: {
+  animeName: String;
+  nbResult: number;
+}) => {
   const variables = {
-    search: animeName,
+    search: payload.animeName,
     page: 1,
-    perPage: nbResult,
+    perPage: payload.nbResult || 43,
   };
 
   const animes: Animes = await getAnime(searchQuery, variables);

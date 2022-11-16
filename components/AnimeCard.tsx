@@ -22,7 +22,7 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
   return (
     <div className="bg-red-900s mx-auto w-44 sm:w-52">
       <div
-        className="relative h-[280px] sm:h-[360px] object-fill m-auto hover:scale-105 transition duration-300 hover:cursor-pointer"
+        className="relative h-[280px] sm:h-[360px]  m-auto hover:scale-105 transition duration-300 hover:cursor-pointer"
         onClick={() => {
           window.open(
             `https://www.youtube.com/results?search_query=${anime.title} trailer`
@@ -35,7 +35,8 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
         <Image
           src={anime?.coverImage}
           alt={anime.title}
-          fill={true}
+          sizes="100%"
+          fill
           className="object-cover"
         />
       </div>
