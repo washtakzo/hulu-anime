@@ -126,14 +126,16 @@ const getSeasonAnime = async (payload: { year: Number; nbResult: number }) => {
   return formatedAnimes;
 };
 
-const getSearchedAnime = async (payload: {
-  animeName: String;
-  nbResult: number;
-}) => {
+const getSearchedAnime = async (
+  payload: {
+    animeName: String;
+    nbResult: number;
+  } = { animeName: "dbz", nbResult: 42 }
+) => {
   const variables = {
     search: payload.animeName,
     page: 1,
-    perPage: payload.nbResult || 43,
+    perPage: payload.nbResult,
   };
 
   const animes: Animes = await getAnime(searchQuery, variables);
