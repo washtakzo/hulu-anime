@@ -9,6 +9,15 @@ type Props = {
   key: any;
 };
 
+const YOUTUBE_SEARCH_BASE_URL = "https://www.youtube.com/results?search_query=";
+
+const getAnimeTrailerYoutubeSearchURL = (animeTitle) =>
+  YOUTUBE_SEARCH_BASE_URL + animeTitle + " teaser";
+
+const MAX_DESCRIPTION_LENGTH = 300;
+const MAX_TITLE_LENGTH = 40;
+const NO_DESCRIPTION_AVAILABLE = "No description available";
+
 const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
   if (isFetching) {
     return (
@@ -24,13 +33,13 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
       <div
         className="relative h-[280px] sm:h-[360px]  m-auto hover:scale-105 transition duration-300 hover:cursor-pointer"
         onClick={() => {
-          window.open(
-            `https://www.youtube.com/results?search_query=${anime.title} trailer`
-          );
+          window.open(getAnimeTrailerYoutubeSearchURL(anime.title));
         }}
       >
         <p className="opacity-0 hover:opacity-100 text-center z-10 text-sm sm:text-md lg:text-[1rem] sm:font-semibold bg-[#0d1c2394]  py-2 absolute top-0 bottom-0 left-[-0px] right-[-0px]">
-          {truncat(anime?.description, 300)}
+          {anime.description
+            ? truncat(anime?.description, MAX_DESCRIPTION_LENGTH)
+            : NO_DESCRIPTION_AVAILABLE}
         </p>
         <Image
           src={anime?.coverImage}
@@ -41,7 +50,9 @@ const AnimeCard = ({ anime = null, isFetching = false }: Props) => {
         />
       </div>
 
-      <h2 className="text-lg py-2 font-semibold">{truncat(anime.title, 40)}</h2>
+      <h2 className="text-lg py-2 font-semibold">
+        {truncat(anime.title, MAX_TITLE_LENGTH)}
+      </h2>
     </div>
   );
 };

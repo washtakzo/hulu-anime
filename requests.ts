@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Animes, FormatedAnimes } from "./types";
 
+const DEFAULT_RESULT_PER_PAGE = 42;
+
 const makeQuery = (variables: string, mediaFilters: string) => {
   return `
   query ($page: Int, $perPage: Int, ${variables}) {
@@ -78,7 +80,7 @@ async function getAnime(query, variables): Promise<Animes> {
 }
 
 const getTrendingAnime = async (
-  payload: { nbResult: number } = { nbResult: 42 }
+  payload: { nbResult: number } = { nbResult: DEFAULT_RESULT_PER_PAGE }
 ) => {
   const variables = {
     page: 1,
@@ -103,7 +105,7 @@ const getTrendingAnime = async (
 };
 
 const getPopularAnime = async (
-  payload: { nbResult: number } = { nbResult: 42 }
+  payload: { nbResult: number } = { nbResult: DEFAULT_RESULT_PER_PAGE }
 ) => {
   const variables = {
     page: 1,
@@ -118,7 +120,7 @@ const getSeasonAnime = async (payload: { year: Number; nbResult: number }) => {
   const variables = {
     seasonYear: payload.year,
     page: 1,
-    perPage: 42,
+    perPage: payload.nbResult || DEFAULT_RESULT_PER_PAGE,
   };
 
   const animes: Animes = await getAnime(seasonQuery, variables);
@@ -130,7 +132,7 @@ const getSearchedAnime = async (
   payload: {
     animeName: String;
     nbResult: number;
-  } = { animeName: "dbz", nbResult: 42 }
+  } = { animeName: "dbz", nbResult: DEFAULT_RESULT_PER_PAGE }
 ) => {
   const variables = {
     search: payload.animeName,
