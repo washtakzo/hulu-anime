@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   const handleClick = () => {
-    window.open("https://zoherouazzar.webflow.io/");
+    window.open("https://zoherouazzar.com");
   };
   return (
     <footer>
